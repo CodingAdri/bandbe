@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
 
 before_action :set_room, only: [:show, :edit, :update]
 before_action :authenticate_user!, except: [:show]
+before_action : require_same_user, only: [:edit, :update]
    def index
       @rooms = current_user.rooms
    end
@@ -13,6 +14,12 @@ before_action :authenticate_user!, except: [:show]
    def create
       @room = current_user.rooms.build(room_params)
       if @room.save
+           if params[:images]
+               params[:images].each do |i|
+                  @room.photos.create(image: i)
+               end
+            end
+          @photos = @room.photos   
           redirect_to @room, notice: "Votre annonce a été ajoutée avec succès"
       else
          render :new
@@ -20,6 +27,7 @@ before_action :authenticate_user!, except: [:show]
    end
    
    def show
+      @photos = @room.photos
    end
  
    def edit
@@ -27,7 +35,13 @@ before_action :authenticate_user!, except: [:show]
    
    def update
        if @room.update(room_params)
-           redirect_to @room, notice: "Modification enregistrée"
+          if params[:images]
+               params[:images].each do |i|
+                  @room.photos.create(image: i)
+               end
+            end
+          @photos = @room.photos
+          redirect_to edit_room_path(@room), notice: "Modification enregistrée"
        else
           render :edit
        end
@@ -43,6 +57,11 @@ private
       :listing_name, :summary, :adress, :is_wifi, :is_tv, :is_closet, :is_heating, :is_kitchen,
       :is_smoking, :is_elevator, :is_essentials, :is_skilocker, :is_pool, :is_hottub, :price, :active)
    end
-   
+  
+  def require_same_user
+     if current_user.id != @room.user_id
+        flash[:danger] = "Vous n'avez pas le droit de modifier cette page"
+        redirect_to root_path
+      end
    
 end
