@@ -2,9 +2,11 @@ class RoomsController < ApplicationController
 
 before_action :set_room, only: [:show, :edit, :update]
 before_action :authenticate_user!, except: [:show]
-before_action : require_same_user, only: [:edit, :update]
+before_action :require_same_user, only: [:edit, :update]
+
+
    def index
-      @rooms = current_user.rooms
+      @room = current_user.rooms
    end
    
    def new
@@ -14,34 +16,43 @@ before_action : require_same_user, only: [:edit, :update]
    def create
       @room = current_user.rooms.build(room_params)
       if @room.save
-           if params[:images]
-               params[:images].each do |i|
+            if params[:images]
+ 
+                params[:images].each do |i|
+ 
                   @room.photos.create(image: i)
-               end
+ 
+            end
+ 
             end
           @photos = @room.photos   
-          redirect_to @room, notice: "Votre annonce a été ajoutée avec succès"
+          redirect_to edit_room_path(@room), notice: "Votre annonce a été ajoutée avec succès"
       else
          render :new
       end
    end
    
    def show
-      @photos = @room.photos
+    @photos = @room.photos
    end
  
    def edit
+       @photos = @room.photos   
    end
    
    def update
        if @room.update(room_params)
-          if params[:images]
-               params[:images].each do |i|
-                  @room.photos.create(image: i)
-               end
+            if params[:images]
+ 
+                  params[:images].each do |i|
+ 
+                     @room.photos.create(image: i)
+ 
+                  end
+ 
             end
-          @photos = @room.photos
-          redirect_to edit_room_path(@room), notice: "Modification enregistrée"
+ 
+ redirect_to edit_room_path(@room), notice:"Modification enregistrée..."
        else
           render :edit
        end
@@ -49,7 +60,7 @@ before_action : require_same_user, only: [:edit, :update]
 
 private
    def set_room
-      @rooms = Room.find(params[:id])
+      @room = Room.find(params[:id])
    end
    
    def room_params
@@ -58,10 +69,15 @@ private
       :is_smoking, :is_elevator, :is_essentials, :is_skilocker, :is_pool, :is_hottub, :price, :active)
    end
   
-  def require_same_user
-     if current_user.id != @room.user_id
-        flash[:danger] = "Vous n'avez pas le droit de modifier cette page"
-        redirect_to root_path
-      end
-   
+   def require_same_user
+ 
+          if current_user.id != @room.user_id
+ 
+               flash[:danger] = "Vous n'avez pas le droit de modifier cette page"
+ 
+               redirect_to root_path
+ 
+          end
+ 
+   end
 end
