@@ -136,6 +136,22 @@
         </div>
         
         <br>
+        <hr>
+        
+        <!-- Reviews -->
+         <div class="row">
+              <div class="col-md-12">
+                    <h3>Commentaires <% @room.average_rating %> </h3>
+                    <div class="container">
+                        <div>
+                            <%= render 'reviews/form' if @booked && !@hasReview %>
+                        </div>
+                        <div>
+                            <%= render 'reviews/list' %>
+                        </div>
+                    </div>
+              </div>
+         </div>
         
         <!-- Google maps -->
         <div class="row">
