@@ -1,11 +1,11 @@
-<% if reviews.count == 0 %>
+<% if @reviews.count == 0 %>
     <div class="text-center"><h4>Aucun Commentaire</h4></div>
 <% else %>
     <% @reviews.order("id DESC").each do |r| %>
         <hr>
         <div class="row">
             <div class="col-md-1">
-                <%= image_tag_avatar_url(@room.user), class:"img-circle avatar-medium" %>
+                <%= image_tag avatar_url(r.user), class:"img-circle avatar-medium" %>
             </div>
             <div class="col-md-11">
               <div>
