@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
     
     def home
+       @room = Room.order("RANDOM()").limit(3)
     end
   
     def search
