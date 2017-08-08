@@ -1,5 +1,4 @@
-<% @messages.each do |message| %>
-      <div class="panel">
+        <div class="panel">
            <div class="panel-body">
                <%= image_tag avatar_url(message.user), class: "img-circle avatar-small" %>
                <strong><%= message.user.fullname %></strong>
@@ -9,5 +8,4 @@
                    <%= message.content %>
                </div>
            </div>
-      </div>
-<% end %>
+        </div>
