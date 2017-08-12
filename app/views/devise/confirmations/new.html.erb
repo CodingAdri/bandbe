@@ -5,8 +5,8 @@
     <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
       <%= render 'shared/devise_errors' %>
     
-      <div class="field">
-        <p> Saisissez l'adresse email associée à votre compte. Nous vous enveroons un lien pour valider votre email.</p>
+      <div class="form-group">
+        <p> Saisissez l'adresse email associée à votre compte. Nous vous enverrons un lien pour valider votre email.</p>
         <%= f.email_field :email, autofocus: true, class:"form-control", placeholder: "Email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
       </div>
     
