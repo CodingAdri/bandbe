@@ -53,23 +53,19 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <!-- Formulaire de réservation -->
-                <%= render 'reservations/form' %>
-            </div>    
-        </div>
-        
-        <!-- Description -->
-        <div class="row">
+                
+                <!-- Description -->
+                <div class="row">
             <div class="col-md-12">
                 <h2>A propos de ce logement</h2>
                 <p><%= @room.summary %></p>
             </div>
         </div>
         
-        <!-- Equipements -->
-        <div class="row">
+                <br>
+        
+                <!-- Equipements -->
+                <div class="row">
             <div class="col-md-2">
                 <p>Equipements</p>
             </div>
@@ -97,6 +93,18 @@
                 </div>
             </div>
         </div>
+                
+            </div>
+            <div class="col-md-4">
+                <!-- Formulaire de réservation -->
+                <%= render 'reservations/form' %>
+            </div>    
+        </div>
+        
+        <br>
+        <hr>
+        
+
         
         <!-- Carousel -->
         <div class="row">
