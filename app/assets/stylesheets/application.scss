@@ -413,6 +413,13 @@ input[type="checkbox"]:checked:before {
  
  }
  
+#message, #stripe {
+  color: #FF0000;
+  opacity: 0.8;
+  display: block;
+  text-align: center;
+}
+ 
  .home-link a, p{
  
      color: #82888a;
