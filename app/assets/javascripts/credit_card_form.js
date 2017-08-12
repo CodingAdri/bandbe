@@ -58,7 +58,7 @@ $(".cc_form").on('submit', submitHandler);
  
               $("[data-stripe=number]").remove();
  
-              $("[data-stripe=cvv]").remove();
+              $("[data-stripe=cvc]").remove();
  
               $("[data-stripe=exp-year]").remove();
  
